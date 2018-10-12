@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+// current URL string parser is deprecated, and will be removed in a future version. To use the new parser, pass option { useNewUrlParser: true } to MongoClient.connect.
+// mongoose.connect('mongodb://localhost:5000/', {useNewUrlParser: true});
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
@@ -17,8 +19,7 @@ app.use(bodyParser.json());
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
-mongoose
-  .connect(db)
+mongoose.connect(db,{ useNewUrlParser: true })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
